@@ -1,0 +1,23 @@
+2022-04-21 04:57:02,436 INFO    MainThread:2307305 [wandb_setup.py:_flush():75] Loading settings from /home2/gaobofei/.config/wandb/settings
+2022-04-21 04:57:02,436 INFO    MainThread:2307305 [wandb_setup.py:_flush():75] Loading settings from /home2/gaobofei/dialogue/CPT/finetune/dialogue_no_trainer/wandb/settings
+2022-04-21 04:57:02,436 INFO    MainThread:2307305 [wandb_setup.py:_flush():75] Loading settings from environment variables: {}
+2022-04-21 04:57:02,436 INFO    MainThread:2307305 [wandb_setup.py:_flush():75] Inferring run settings from compute environment: {'program_relpath': 'query_gen_notrainer.py', 'program': 'query_gen_notrainer.py'}
+2022-04-21 04:57:02,437 INFO    MainThread:2307305 [wandb_init.py:_log_setup():438] Logging user logs to output/query_baseline/wandb/run-20220421_045702-31xy7utc/logs/debug.log
+2022-04-21 04:57:02,437 INFO    MainThread:2307305 [wandb_init.py:_log_setup():439] Logging internal logs to output/query_baseline/wandb/run-20220421_045702-31xy7utc/logs/debug-internal.log
+2022-04-21 04:57:02,437 INFO    MainThread:2307305 [wandb_init.py:init():472] calling init triggers
+2022-04-21 04:57:02,437 INFO    MainThread:2307305 [wandb_init.py:init():475] wandb.init called with sweep_config: {}
+config: {'model_path': 'fnlp/cpt-base', 'data_dir': 'data/DuSinc_dial', 'output_dir': 'output/query_baseline', 'train_file': 'DuSinc/dialogue/train.csv', 'validation_file': 'DuSinc/dialogue/dev.csv', 'test_file': 'DuSinc/dialogue/test.csv', 'max_source_length': 512, 'max_target_length': 256, 'mode': 'train', 'per_device_batch_size': 5, 'learning_rate': 1e-05, 'weight_decay': 0.0, 'num_train_epochs': 10, 'max_train_steps': None, 'gradient_accumulation_steps': 1, 'lr_scheduler_type': <SchedulerType.LINEAR: 'linear'>, 'num_warmup_steps': 0, 'seed': 42, 'num_beams': 4, 'checkpointing_steps': 'epoch', 'team_name': 'ruc-bupt', 'project_name': 'Paddle SINC', 'experiment_name': 'query_gen', 'scenario_name': 'batch_size4*5,baseline_input'}
+2022-04-21 04:57:02,437 INFO    MainThread:2307305 [wandb_init.py:init():525] starting backend
+2022-04-21 04:57:02,437 INFO    MainThread:2307305 [backend.py:_multiprocessing_setup():99] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2022-04-21 04:57:02,453 INFO    MainThread:2307305 [backend.py:ensure_launched():219] starting backend process...
+2022-04-21 04:57:02,460 INFO    MainThread:2307305 [backend.py:ensure_launched():224] started backend process with pid: 2307449
+2022-04-21 04:57:02,462 INFO    MainThread:2307305 [wandb_init.py:init():534] backend started and connected
+2022-04-21 04:57:02,470 INFO    MainThread:2307305 [wandb_init.py:init():598] updated telemetry
+2022-04-21 04:57:02,485 INFO    MainThread:2307305 [wandb_init.py:init():629] communicating run to backend with 30 second timeout
+2022-04-21 04:57:32,486 INFO    MainThread:2307305 [interface_shared.py:_communicate_run():325] couldn't get run from backend
+2022-04-21 04:57:32,487 ERROR   MainThread:2307305 [wandb_init.py:init():634] backend process timed out
+2022-04-21 04:57:32,487 ERROR   MainThread:2307305 [wandb_init.py:init():645] encountered error: Error communicating with wandb process
+try: wandb.init(settings=wandb.Settings(start_method='fork'))
+or:  wandb.init(settings=wandb.Settings(start_method='thread'))
+For more info see: https://docs.wandb.ai/library/init#init-start-error
+2022-04-21 04:57:51,442 INFO    MainThread:2307305 [wandb_init.py:teardown():286] tearing down wandb.init

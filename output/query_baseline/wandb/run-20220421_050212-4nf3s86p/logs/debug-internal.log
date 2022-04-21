@@ -1,0 +1,284 @@
+2022-04-21 05:02:13,778 INFO    MainThread:2308740 [internal.py:wandb_internal():62] W&B internal server running at pid: 2308740
+2022-04-21 05:02:13,781 INFO    WriterThread:2308740 [datastore.py:open_for_write():76] open: output/query_baseline/wandb/run-20220421_050212-4nf3s86p/run-4nf3s86p.wandb
+2022-04-21 05:02:13,781 DEBUG   HandlerThread:2308740 [handler.py:handle_request():54] handle_request: check_version
+2022-04-21 05:02:13,783 DEBUG   SenderThread:2308740 [sender.py:send():89] send: header
+2022-04-21 05:02:13,783 DEBUG   SenderThread:2308740 [sender.py:send():89] send: request
+2022-04-21 05:02:13,783 DEBUG   SenderThread:2308740 [sender.py:send_request():98] send_request: check_version
+2022-04-21 05:02:13,787 DEBUG   Thread-4  :2308740 [connectionpool.py:_new_conn():939] Starting new HTTPS connection (1): pypi.org:443
+2022-04-21 05:02:18,785 DEBUG   SenderThread:2308740 [sender.py:send():89] send: run
+2022-04-21 05:02:18,796 DEBUG   SenderThread:2308740 [cmd.py:execute():870] Popen(['git', 'cat-file', '--batch-check'], cwd=/home2/gaobofei/dialogue/CPT/finetune/dialogue_no_trainer, universal_newlines=False, shell=None, istream=<valid stream>)
+2022-04-21 05:02:18,807 DEBUG   SenderThread:2308740 [connectionpool.py:_new_conn():939] Starting new HTTPS connection (1): api.wandb.ai:443
+2022-04-21 05:02:19,253 DEBUG   SenderThread:2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+2022-04-21 05:02:19,261 INFO    SenderThread:2308740 [dir_watcher.py:__init__():167] watching files in: output/query_baseline/wandb/run-20220421_050212-4nf3s86p/files
+2022-04-21 05:02:19,261 INFO    SenderThread:2308740 [sender.py:_start_run_threads():486] run started: 4nf3s86p with start time 1650517332
+2022-04-21 05:02:19,294 DEBUG   SenderThread:2308740 [sender.py:send():89] send: summary
+2022-04-21 05:02:19,294 DEBUG   HandlerThread:2308740 [handler.py:handle_request():54] handle_request: run_start
+2022-04-21 05:02:19,295 INFO    SenderThread:2308740 [sender.py:_save_file():567] saving file wandb-summary.json with policy end
+2022-04-21 05:02:19,326 DEBUG   HandlerThread:2308740 [cmd.py:execute():870] Popen(['git', 'cat-file', '--batch-check'], cwd=/home2/gaobofei/dialogue/CPT/finetune/dialogue_no_trainer, universal_newlines=False, shell=None, istream=<valid stream>)
+2022-04-21 05:02:19,335 DEBUG   HandlerThread:2308740 [cmd.py:execute():870] Popen(['git', 'rev-parse', '--show-toplevel'], cwd=/home2/gaobofei/dialogue/CPT/finetune/dialogue_no_trainer, universal_newlines=False, shell=None, istream=None)
+2022-04-21 05:02:19,351 DEBUG   SenderThread:2308740 [sender.py:send():89] send: files
+2022-04-21 05:02:19,352 INFO    SenderThread:2308740 [sender.py:_save_file():567] saving file wandb-metadata.json with policy now
+2022-04-21 05:02:19,360 DEBUG   HandlerThread:2308740 [handler.py:handle_request():54] handle_request: status
+2022-04-21 05:02:19,361 DEBUG   SenderThread:2308740 [sender.py:send():89] send: request
+2022-04-21 05:02:19,361 DEBUG   Thread-11 :2308740 [connectionpool.py:_new_conn():939] Starting new HTTPS connection (1): api.wandb.ai:443
+2022-04-21 05:02:19,361 DEBUG   SenderThread:2308740 [sender.py:send_request():98] send_request: status
+2022-04-21 05:02:19,367 DEBUG   SenderThread:2308740 [connectionpool.py:_new_conn():939] Starting new HTTPS connection (1): api.wandb.ai:443
+2022-04-21 05:02:19,743 DEBUG   SenderThread:2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+2022-04-21 05:02:19,745 DEBUG   Thread-11 :2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+2022-04-21 05:02:19,759 DEBUG   Thread-11 :2308740 [connectionpool.py:_new_conn():939] Starting new HTTPS connection (1): storage.googleapis.com:443
+2022-04-21 05:02:20,265 INFO    Thread-8  :2308740 [dir_watcher.py:_on_file_created():215] file/dir created: output/query_baseline/wandb/run-20220421_050212-4nf3s86p/files/requirements.txt
+2022-04-21 05:02:20,265 INFO    Thread-8  :2308740 [dir_watcher.py:_on_file_created():215] file/dir created: output/query_baseline/wandb/run-20220421_050212-4nf3s86p/files/wandb-metadata.json
+2022-04-21 05:02:20,265 INFO    Thread-8  :2308740 [dir_watcher.py:_on_file_created():215] file/dir created: output/query_baseline/wandb/run-20220421_050212-4nf3s86p/files/output.log
+2022-04-21 05:02:20,266 INFO    Thread-8  :2308740 [dir_watcher.py:_on_file_created():215] file/dir created: output/query_baseline/wandb/run-20220421_050212-4nf3s86p/files/wandb-summary.json
+2022-04-21 05:02:20,388 DEBUG   Thread-11 :2308740 [connectionpool.py:_make_request():433] https://storage.googleapis.com:443 "PUT /wandb-production.appspot.com/ruc-bupt/Paddle%20SINC/4nf3s86p/wandb-metadata.json?Expires=1650603739&GoogleAccessId=wandb-production%40appspot.gserviceaccount.com&Signature=V319QhuoXLvX69sApcMwld6FFh7uLqDiR3gjzkWzTU4LPCdLuu31pv%2Fv5ncNYVsLSioi48DxcF%2Fxfsrs6rdnFj079GJFp6HLfJE2z%2BeHz4GDZ94Q80%2Fw2gGyBhID0R5Bfw5YfXbuPh9s4VwQOOK5sMKkD03VQESjfCIMYBotJG6zTg57oQNxm2HcsT4D2mL5v0ylxQMiaTTVlfljTzfwV8m8y4sQeagvHkCQXij2pv4M%2BHEncqCcaAMYGZyv9HE6RAxyBWQVL9AKcaCpqLNiKzrqdXMBv43PQBQQ0SFV20V3udZOuZC6p8upGpF86tDni5pjazbTey4S2crDbvTo7Q%3D%3D HTTP/1.1" 200 0
+2022-04-21 05:02:20,391 INFO    Thread-11 :2308740 [upload_job.py:push():112] Uploaded file /tmp/tmptej5tvm1wandb/2arcjqvv-wandb-metadata.json
+2022-04-21 05:02:21,297 DEBUG   Thread-5  :2308740 [connectionpool.py:_new_conn():939] Starting new HTTPS connection (1): api.wandb.ai:443
+2022-04-21 05:02:21,714 DEBUG   Thread-5  :2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /files/ruc-bupt/Paddle%20SINC/4nf3s86p/file_stream HTTP/1.1" 200 None
+2022-04-21 05:02:23,661 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:02:28,670 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:02:33,614 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:02:34,757 DEBUG   HandlerThread:2308740 [handler.py:handle_request():54] handle_request: status
+2022-04-21 05:02:34,757 DEBUG   SenderThread:2308740 [sender.py:send():89] send: request
+2022-04-21 05:02:34,757 DEBUG   SenderThread:2308740 [sender.py:send_request():98] send_request: status
+2022-04-21 05:02:34,763 DEBUG   SenderThread:2308740 [connectionpool.py:_new_conn():939] Starting new HTTPS connection (1): api.wandb.ai:443
+2022-04-21 05:02:35,145 DEBUG   SenderThread:2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+2022-04-21 05:02:38,528 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:02:43,427 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:02:48,422 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:02:50,150 DEBUG   HandlerThread:2308740 [handler.py:handle_request():54] handle_request: status
+2022-04-21 05:02:50,151 DEBUG   SenderThread:2308740 [sender.py:send():89] send: request
+2022-04-21 05:02:50,151 DEBUG   SenderThread:2308740 [sender.py:send_request():98] send_request: status
+2022-04-21 05:02:50,157 DEBUG   SenderThread:2308740 [connectionpool.py:_new_conn():939] Starting new HTTPS connection (1): api.wandb.ai:443
+2022-04-21 05:02:50,277 INFO    Thread-8  :2308740 [dir_watcher.py:_on_file_modified():228] file/dir modified: output/query_baseline/wandb/run-20220421_050212-4nf3s86p/files/output.log
+2022-04-21 05:02:50,874 DEBUG   SenderThread:2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+2022-04-21 05:02:53,596 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:02:58,698 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:03:01,283 INFO    Thread-8  :2308740 [dir_watcher.py:_on_file_modified():228] file/dir modified: output/query_baseline/wandb/run-20220421_050212-4nf3s86p/files/output.log
+2022-04-21 05:03:02,284 INFO    Thread-8  :2308740 [dir_watcher.py:_on_file_modified():228] file/dir modified: output/query_baseline/wandb/run-20220421_050212-4nf3s86p/files/output.log
+2022-04-21 05:03:03,818 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:03:05,880 DEBUG   HandlerThread:2308740 [handler.py:handle_request():54] handle_request: status
+2022-04-21 05:03:05,880 DEBUG   SenderThread:2308740 [sender.py:send():89] send: request
+2022-04-21 05:03:05,880 DEBUG   SenderThread:2308740 [sender.py:send_request():98] send_request: status
+2022-04-21 05:03:05,886 DEBUG   SenderThread:2308740 [connectionpool.py:_new_conn():939] Starting new HTTPS connection (1): api.wandb.ai:443
+2022-04-21 05:03:06,254 DEBUG   SenderThread:2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+2022-04-21 05:03:08,977 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:03:09,288 INFO    Thread-8  :2308740 [dir_watcher.py:_on_file_modified():228] file/dir modified: output/query_baseline/wandb/run-20220421_050212-4nf3s86p/files/output.log
+2022-04-21 05:03:10,288 INFO    Thread-8  :2308740 [dir_watcher.py:_on_file_modified():228] file/dir modified: output/query_baseline/wandb/run-20220421_050212-4nf3s86p/files/output.log
+2022-04-21 05:03:12,290 INFO    Thread-8  :2308740 [dir_watcher.py:_on_file_modified():228] file/dir modified: output/query_baseline/wandb/run-20220421_050212-4nf3s86p/files/output.log
+2022-04-21 05:03:13,291 INFO    Thread-8  :2308740 [dir_watcher.py:_on_file_modified():228] file/dir modified: output/query_baseline/wandb/run-20220421_050212-4nf3s86p/files/output.log
+2022-04-21 05:03:14,182 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:03:15,292 INFO    Thread-8  :2308740 [dir_watcher.py:_on_file_modified():228] file/dir modified: output/query_baseline/wandb/run-20220421_050212-4nf3s86p/files/output.log
+2022-04-21 05:03:16,293 INFO    Thread-8  :2308740 [dir_watcher.py:_on_file_modified():228] file/dir modified: output/query_baseline/wandb/run-20220421_050212-4nf3s86p/files/output.log
+2022-04-21 05:03:18,294 INFO    Thread-8  :2308740 [dir_watcher.py:_on_file_modified():228] file/dir modified: output/query_baseline/wandb/run-20220421_050212-4nf3s86p/files/output.log
+2022-04-21 05:03:19,006 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:03:19,294 INFO    Thread-8  :2308740 [dir_watcher.py:_on_file_modified():228] file/dir modified: output/query_baseline/wandb/run-20220421_050212-4nf3s86p/files/output.log
+2022-04-21 05:03:20,295 INFO    Thread-8  :2308740 [dir_watcher.py:_on_file_modified():228] file/dir modified: output/query_baseline/wandb/run-20220421_050212-4nf3s86p/files/output.log
+2022-04-21 05:03:21,571 DEBUG   HandlerThread:2308740 [handler.py:handle_request():54] handle_request: status
+2022-04-21 05:03:21,572 DEBUG   SenderThread:2308740 [sender.py:send():89] send: request
+2022-04-21 05:03:21,572 DEBUG   SenderThread:2308740 [sender.py:send_request():98] send_request: status
+2022-04-21 05:03:21,578 DEBUG   SenderThread:2308740 [connectionpool.py:_new_conn():939] Starting new HTTPS connection (1): api.wandb.ai:443
+2022-04-21 05:03:21,977 DEBUG   SenderThread:2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+2022-04-21 05:03:22,296 INFO    Thread-8  :2308740 [dir_watcher.py:_on_file_modified():228] file/dir modified: output/query_baseline/wandb/run-20220421_050212-4nf3s86p/files/output.log
+2022-04-21 05:03:23,297 INFO    Thread-8  :2308740 [dir_watcher.py:_on_file_modified():228] file/dir modified: output/query_baseline/wandb/run-20220421_050212-4nf3s86p/files/output.log
+2022-04-21 05:03:23,838 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:03:23,899 DEBUG   Thread-5  :2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /files/ruc-bupt/Paddle%20SINC/4nf3s86p/file_stream HTTP/1.1" 408 279
+2022-04-21 05:03:23,900 WARNING Thread-5  :2308740 [util.py:request_with_retry():643] requests_with_retry encountered retryable exception: 408 Client Error: Request Timeout for url: https://api.wandb.ai/files/ruc-bupt/Paddle%20SINC/4nf3s86p/file_stream. args: ('https://api.wandb.ai/files/ruc-bupt/Paddle SINC/4nf3s86p/file_stream',), kwargs: {'json': {'files': {'wandb-events.jsonl': {'offset': 0, 'content': ['{"system.gpu.0.gpu": 68.5, "system.gpu.0.memory": 46.5, "system.gpu.0.memoryAllocated": 72.1, "system.gpu.0.temp": 79.5, "system.gpu.process.0.gpu": 74.0, "system.gpu.process.0.memory": 57.67, "system.gpu.process.0.memoryAllocated": 72.95, "system.gpu.process.0.temp": 79.67, "system.gpu.0.powerWatts": 200.51, "system.gpu.0.powerPercent": 80.2, "system.gpu.process.0.powerWatts": 190.69, "system.gpu.process.0.powerPercent": 76.27, "system.gpu.1.gpu": 86.75, "system.gpu.1.memory": 37.5, "system.gpu.1.memoryAllocated": 64.17, "system.gpu.1.temp": 82.75, "system.gpu.1.powerWatts": 176.22, "system.gpu.1.powerPercent": 70.49, "system.gpu.2.gpu": 80.25, "system.gpu.2.memory": 35.0, "system.gpu.2.memoryAllocated": 67.65, "system.gpu.2.temp": 82.75, "system.gpu.2.powerWatts": 195.34, "system.gpu.2.powerPercent": 78.13, "system.gpu.3.gpu": 71.0, "system.gpu.3.memory": 30.5, "system.gpu.3.memoryAllocated": 71.14, "system.gpu.3.temp": 83.0, "system.gpu.3.powerWatts": 200.57, "system.gpu.3.powerPercent": 80.23, "system.cpu": 21.42, "system.memory": 25.25, "system.disk": 14.6, "system.proc.memory.availableMB": 96276.94, "system.proc.memory.rssMB": 98.98, "system.proc.memory.percent": 0.08, "system.proc.cpu.threads": 13.25, "system.network.sent": 56163, "system.network.recv": 105690, "_wandb": true, "_timestamp": 1650517343, "_runtime": 11}']}}}}
+2022-04-21 05:03:24,297 INFO    Thread-8  :2308740 [dir_watcher.py:_on_file_modified():228] file/dir modified: output/query_baseline/wandb/run-20220421_050212-4nf3s86p/files/output.log
+2022-04-21 05:03:26,296 DEBUG   Thread-5  :2308740 [connectionpool.py:_get_conn():271] Resetting dropped connection: api.wandb.ai
+2022-04-21 05:03:26,298 INFO    Thread-8  :2308740 [dir_watcher.py:_on_file_modified():228] file/dir modified: output/query_baseline/wandb/run-20220421_050212-4nf3s86p/files/output.log
+2022-04-21 05:03:27,274 DEBUG   Thread-5  :2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /files/ruc-bupt/Paddle%20SINC/4nf3s86p/file_stream HTTP/1.1" 200 None
+2022-04-21 05:03:27,660 DEBUG   Thread-5  :2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /files/ruc-bupt/Paddle%20SINC/4nf3s86p/file_stream HTTP/1.1" 200 None
+2022-04-21 05:03:28,707 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:03:33,564 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:03:37,009 DEBUG   HandlerThread:2308740 [handler.py:handle_request():54] handle_request: status
+2022-04-21 05:03:37,010 DEBUG   SenderThread:2308740 [sender.py:send():89] send: request
+2022-04-21 05:03:37,010 DEBUG   SenderThread:2308740 [sender.py:send_request():98] send_request: status
+2022-04-21 05:03:37,016 DEBUG   SenderThread:2308740 [connectionpool.py:_new_conn():939] Starting new HTTPS connection (1): api.wandb.ai:443
+2022-04-21 05:03:37,400 DEBUG   SenderThread:2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+2022-04-21 05:03:38,389 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:03:38,667 DEBUG   Thread-5  :2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /files/ruc-bupt/Paddle%20SINC/4nf3s86p/file_stream HTTP/1.1" 200 None
+2022-04-21 05:03:43,315 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:03:48,216 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:03:52,406 DEBUG   HandlerThread:2308740 [handler.py:handle_request():54] handle_request: status
+2022-04-21 05:03:52,406 DEBUG   SenderThread:2308740 [sender.py:send():89] send: request
+2022-04-21 05:03:52,407 DEBUG   SenderThread:2308740 [sender.py:send_request():98] send_request: status
+2022-04-21 05:03:52,410 DEBUG   SenderThread:2308740 [connectionpool.py:_new_conn():939] Starting new HTTPS connection (1): api.wandb.ai:443
+2022-04-21 05:03:52,802 DEBUG   SenderThread:2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+2022-04-21 05:03:53,381 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:03:53,739 DEBUG   Thread-5  :2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /files/ruc-bupt/Paddle%20SINC/4nf3s86p/file_stream HTTP/1.1" 200 None
+2022-04-21 05:03:58,195 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:03:59,315 INFO    Thread-8  :2308740 [dir_watcher.py:_on_file_modified():228] file/dir modified: output/query_baseline/wandb/run-20220421_050212-4nf3s86p/files/output.log
+2022-04-21 05:04:03,234 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:04:08,191 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:04:08,384 DEBUG   HandlerThread:2308740 [handler.py:handle_request():54] handle_request: status
+2022-04-21 05:04:08,384 DEBUG   SenderThread:2308740 [sender.py:send():89] send: request
+2022-04-21 05:04:08,385 DEBUG   SenderThread:2308740 [sender.py:send_request():98] send_request: status
+2022-04-21 05:04:08,389 DEBUG   SenderThread:2308740 [connectionpool.py:_new_conn():939] Starting new HTTPS connection (1): api.wandb.ai:443
+2022-04-21 05:04:08,478 DEBUG   Thread-5  :2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /files/ruc-bupt/Paddle%20SINC/4nf3s86p/file_stream HTTP/1.1" 200 None
+2022-04-21 05:04:08,773 DEBUG   SenderThread:2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+2022-04-21 05:04:13,260 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:04:18,180 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:04:23,017 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:04:23,293 DEBUG   Thread-5  :2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /files/ruc-bupt/Paddle%20SINC/4nf3s86p/file_stream HTTP/1.1" 200 None
+2022-04-21 05:04:23,778 DEBUG   HandlerThread:2308740 [handler.py:handle_request():54] handle_request: status
+2022-04-21 05:04:23,779 DEBUG   SenderThread:2308740 [sender.py:send():89] send: request
+2022-04-21 05:04:23,779 DEBUG   SenderThread:2308740 [sender.py:send_request():98] send_request: status
+2022-04-21 05:04:23,783 DEBUG   SenderThread:2308740 [connectionpool.py:_new_conn():939] Starting new HTTPS connection (1): api.wandb.ai:443
+2022-04-21 05:04:24,184 DEBUG   SenderThread:2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+2022-04-21 05:04:28,040 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:04:32,974 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:04:37,841 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:04:38,611 DEBUG   Thread-5  :2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /files/ruc-bupt/Paddle%20SINC/4nf3s86p/file_stream HTTP/1.1" 200 None
+2022-04-21 05:04:39,188 DEBUG   HandlerThread:2308740 [handler.py:handle_request():54] handle_request: status
+2022-04-21 05:04:39,189 DEBUG   SenderThread:2308740 [sender.py:send():89] send: request
+2022-04-21 05:04:39,189 DEBUG   SenderThread:2308740 [sender.py:send_request():98] send_request: status
+2022-04-21 05:04:39,194 DEBUG   SenderThread:2308740 [connectionpool.py:_new_conn():939] Starting new HTTPS connection (1): api.wandb.ai:443
+2022-04-21 05:04:39,605 DEBUG   SenderThread:2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+2022-04-21 05:04:42,724 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:04:47,680 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:04:52,569 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:04:52,834 DEBUG   Thread-5  :2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /files/ruc-bupt/Paddle%20SINC/4nf3s86p/file_stream HTTP/1.1" 200 None
+2022-04-21 05:04:54,611 DEBUG   HandlerThread:2308740 [handler.py:handle_request():54] handle_request: status
+2022-04-21 05:04:54,612 DEBUG   SenderThread:2308740 [sender.py:send():89] send: request
+2022-04-21 05:04:54,612 DEBUG   SenderThread:2308740 [sender.py:send_request():98] send_request: status
+2022-04-21 05:04:54,618 DEBUG   SenderThread:2308740 [connectionpool.py:_new_conn():939] Starting new HTTPS connection (1): api.wandb.ai:443
+2022-04-21 05:04:55,004 DEBUG   SenderThread:2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+2022-04-21 05:04:57,459 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:05:02,390 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:05:07,307 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:05:07,655 DEBUG   Thread-5  :2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /files/ruc-bupt/Paddle%20SINC/4nf3s86p/file_stream HTTP/1.1" 200 None
+2022-04-21 05:05:10,010 DEBUG   HandlerThread:2308740 [handler.py:handle_request():54] handle_request: status
+2022-04-21 05:05:10,010 DEBUG   SenderThread:2308740 [sender.py:send():89] send: request
+2022-04-21 05:05:10,010 DEBUG   SenderThread:2308740 [sender.py:send_request():98] send_request: status
+2022-04-21 05:05:10,014 DEBUG   SenderThread:2308740 [connectionpool.py:_new_conn():939] Starting new HTTPS connection (1): api.wandb.ai:443
+2022-04-21 05:05:10,438 DEBUG   SenderThread:2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+2022-04-21 05:05:12,201 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:05:17,113 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:05:22,138 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:05:22,417 DEBUG   Thread-5  :2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /files/ruc-bupt/Paddle%20SINC/4nf3s86p/file_stream HTTP/1.1" 200 None
+2022-04-21 05:05:25,443 DEBUG   HandlerThread:2308740 [handler.py:handle_request():54] handle_request: status
+2022-04-21 05:05:25,444 DEBUG   SenderThread:2308740 [sender.py:send():89] send: request
+2022-04-21 05:05:25,444 DEBUG   SenderThread:2308740 [sender.py:send_request():98] send_request: status
+2022-04-21 05:05:25,449 DEBUG   SenderThread:2308740 [connectionpool.py:_new_conn():939] Starting new HTTPS connection (1): api.wandb.ai:443
+2022-04-21 05:05:25,825 DEBUG   SenderThread:2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+2022-04-21 05:05:27,025 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:05:31,858 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:05:36,682 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:05:36,952 DEBUG   Thread-5  :2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /files/ruc-bupt/Paddle%20SINC/4nf3s86p/file_stream HTTP/1.1" 200 None
+2022-04-21 05:05:40,831 DEBUG   HandlerThread:2308740 [handler.py:handle_request():54] handle_request: status
+2022-04-21 05:05:40,831 DEBUG   SenderThread:2308740 [sender.py:send():89] send: request
+2022-04-21 05:05:40,831 DEBUG   SenderThread:2308740 [sender.py:send_request():98] send_request: status
+2022-04-21 05:05:40,836 DEBUG   SenderThread:2308740 [connectionpool.py:_new_conn():939] Starting new HTTPS connection (1): api.wandb.ai:443
+2022-04-21 05:05:41,718 DEBUG   SenderThread:2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+2022-04-21 05:05:41,721 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:05:46,384 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:05:51,239 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:05:51,512 DEBUG   Thread-5  :2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /files/ruc-bupt/Paddle%20SINC/4nf3s86p/file_stream HTTP/1.1" 200 None
+2022-04-21 05:05:56,072 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:05:56,723 DEBUG   HandlerThread:2308740 [handler.py:handle_request():54] handle_request: status
+2022-04-21 05:05:56,723 DEBUG   SenderThread:2308740 [sender.py:send():89] send: request
+2022-04-21 05:05:56,723 DEBUG   SenderThread:2308740 [sender.py:send_request():98] send_request: status
+2022-04-21 05:05:56,727 DEBUG   SenderThread:2308740 [connectionpool.py:_new_conn():939] Starting new HTTPS connection (1): api.wandb.ai:443
+2022-04-21 05:05:57,117 DEBUG   SenderThread:2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+2022-04-21 05:06:00,936 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:06:05,748 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:06:06,027 DEBUG   Thread-5  :2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /files/ruc-bupt/Paddle%20SINC/4nf3s86p/file_stream HTTP/1.1" 200 None
+2022-04-21 05:06:10,553 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:06:12,122 DEBUG   HandlerThread:2308740 [handler.py:handle_request():54] handle_request: status
+2022-04-21 05:06:12,122 DEBUG   SenderThread:2308740 [sender.py:send():89] send: request
+2022-04-21 05:06:12,122 DEBUG   SenderThread:2308740 [sender.py:send_request():98] send_request: status
+2022-04-21 05:06:12,127 DEBUG   SenderThread:2308740 [connectionpool.py:_new_conn():939] Starting new HTTPS connection (1): api.wandb.ai:443
+2022-04-21 05:06:12,489 DEBUG   SenderThread:2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+2022-04-21 05:06:15,444 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:06:20,267 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:06:20,555 DEBUG   Thread-5  :2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /files/ruc-bupt/Paddle%20SINC/4nf3s86p/file_stream HTTP/1.1" 200 None
+2022-04-21 05:06:25,108 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:06:27,494 DEBUG   HandlerThread:2308740 [handler.py:handle_request():54] handle_request: status
+2022-04-21 05:06:27,495 DEBUG   SenderThread:2308740 [sender.py:send():89] send: request
+2022-04-21 05:06:27,495 DEBUG   SenderThread:2308740 [sender.py:send_request():98] send_request: status
+2022-04-21 05:06:27,499 DEBUG   SenderThread:2308740 [connectionpool.py:_new_conn():939] Starting new HTTPS connection (1): api.wandb.ai:443
+2022-04-21 05:06:27,997 DEBUG   SenderThread:2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+2022-04-21 05:06:29,924 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:06:34,737 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:06:35,021 DEBUG   Thread-5  :2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /files/ruc-bupt/Paddle%20SINC/4nf3s86p/file_stream HTTP/1.1" 200 None
+2022-04-21 05:06:39,573 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:06:43,001 DEBUG   HandlerThread:2308740 [handler.py:handle_request():54] handle_request: status
+2022-04-21 05:06:43,002 DEBUG   SenderThread:2308740 [sender.py:send():89] send: request
+2022-04-21 05:06:43,002 DEBUG   SenderThread:2308740 [sender.py:send_request():98] send_request: status
+2022-04-21 05:06:43,006 DEBUG   SenderThread:2308740 [connectionpool.py:_new_conn():939] Starting new HTTPS connection (1): api.wandb.ai:443
+2022-04-21 05:06:43,379 DEBUG   SenderThread:2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+2022-04-21 05:06:44,364 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:06:49,147 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:06:49,793 DEBUG   Thread-5  :2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /files/ruc-bupt/Paddle%20SINC/4nf3s86p/file_stream HTTP/1.1" 200 None
+2022-04-21 05:06:54,096 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:06:58,385 DEBUG   HandlerThread:2308740 [handler.py:handle_request():54] handle_request: status
+2022-04-21 05:06:58,385 DEBUG   SenderThread:2308740 [sender.py:send():89] send: request
+2022-04-21 05:06:58,385 DEBUG   SenderThread:2308740 [sender.py:send_request():98] send_request: status
+2022-04-21 05:06:58,389 DEBUG   SenderThread:2308740 [connectionpool.py:_new_conn():939] Starting new HTTPS connection (1): api.wandb.ai:443
+2022-04-21 05:06:59,055 DEBUG   SenderThread:2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+2022-04-21 05:06:59,359 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:06:59,694 DEBUG   Thread-5  :2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /files/ruc-bupt/Paddle%20SINC/4nf3s86p/file_stream HTTP/1.1" 200 None
+2022-04-21 05:07:03,870 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:07:08,843 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:07:13,802 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:07:14,361 DEBUG   HandlerThread:2308740 [handler.py:handle_request():54] handle_request: status
+2022-04-21 05:07:14,361 DEBUG   SenderThread:2308740 [sender.py:send():89] send: request
+2022-04-21 05:07:14,362 DEBUG   SenderThread:2308740 [sender.py:send_request():98] send_request: status
+2022-04-21 05:07:14,368 DEBUG   SenderThread:2308740 [connectionpool.py:_new_conn():939] Starting new HTTPS connection (1): api.wandb.ai:443
+2022-04-21 05:07:14,789 DEBUG   SenderThread:2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+2022-04-21 05:07:18,807 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:07:23,796 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:07:28,763 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:07:29,794 DEBUG   HandlerThread:2308740 [handler.py:handle_request():54] handle_request: status
+2022-04-21 05:07:29,794 DEBUG   SenderThread:2308740 [sender.py:send():89] send: request
+2022-04-21 05:07:29,794 DEBUG   SenderThread:2308740 [sender.py:send_request():98] send_request: status
+2022-04-21 05:07:29,798 DEBUG   SenderThread:2308740 [connectionpool.py:_new_conn():939] Starting new HTTPS connection (1): api.wandb.ai:443
+2022-04-21 05:07:30,337 DEBUG   SenderThread:2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+2022-04-21 05:07:33,703 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:07:33,998 DEBUG   Thread-5  :2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /files/ruc-bupt/Paddle%20SINC/4nf3s86p/file_stream HTTP/1.1" 200 None
+2022-04-21 05:07:38,629 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:07:43,597 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:07:45,342 DEBUG   HandlerThread:2308740 [handler.py:handle_request():54] handle_request: status
+2022-04-21 05:07:45,342 DEBUG   SenderThread:2308740 [sender.py:send():89] send: request
+2022-04-21 05:07:45,342 DEBUG   SenderThread:2308740 [sender.py:send_request():98] send_request: status
+2022-04-21 05:07:45,346 DEBUG   SenderThread:2308740 [connectionpool.py:_new_conn():939] Starting new HTTPS connection (1): api.wandb.ai:443
+2022-04-21 05:07:45,760 DEBUG   SenderThread:2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+2022-04-21 05:07:45,944 WARNING MainThread:2308740 [internal.py:wandb_internal():116] Internal process interrupt: 1
+2022-04-21 05:07:50,603 DEBUG   SenderThread:2308740 [sender.py:send():89] send: stats
+2022-04-21 05:07:51,951 WARNING MainThread:2308740 [internal.py:is_dead():284] Internal process exiting, parent pid 2308668 disappeared
+2022-04-21 05:07:51,951 ERROR   MainThread:2308740 [internal.py:wandb_internal():112] Internal process shutdown.
+2022-04-21 05:07:52,604 INFO    SenderThread:2308740 [sender.py:finish():608] shutting down sender
+2022-04-21 05:07:52,605 INFO    SenderThread:2308740 [dir_watcher.py:finish():280] shutting down directory watcher
+2022-04-21 05:07:52,605 INFO    WriterThread:2308740 [datastore.py:close():257] close: output/query_baseline/wandb/run-20220421_050212-4nf3s86p/run-4nf3s86p.wandb
+2022-04-21 05:07:52,605 INFO    HandlerThread:2308740 [handler.py:finish():267] shutting down handler
+2022-04-21 05:07:53,350 INFO    SenderThread:2308740 [dir_watcher.py:finish():309] scan: output/query_baseline/wandb/run-20220421_050212-4nf3s86p/files
+2022-04-21 05:07:53,350 INFO    SenderThread:2308740 [dir_watcher.py:finish():315] scan save: output/query_baseline/wandb/run-20220421_050212-4nf3s86p/files/requirements.txt requirements.txt
+2022-04-21 05:07:53,350 INFO    SenderThread:2308740 [dir_watcher.py:finish():315] scan save: output/query_baseline/wandb/run-20220421_050212-4nf3s86p/files/output.log output.log
+2022-04-21 05:07:53,351 INFO    SenderThread:2308740 [dir_watcher.py:finish():315] scan save: output/query_baseline/wandb/run-20220421_050212-4nf3s86p/files/wandb-summary.json wandb-summary.json
+2022-04-21 05:07:53,357 DEBUG   Thread-12 :2308740 [connectionpool.py:_new_conn():939] Starting new HTTPS connection (1): api.wandb.ai:443
+2022-04-21 05:07:53,362 DEBUG   Thread-13 :2308740 [connectionpool.py:_new_conn():939] Starting new HTTPS connection (1): api.wandb.ai:443
+2022-04-21 05:07:53,363 INFO    SenderThread:2308740 [dir_watcher.py:finish():315] scan save: output/query_baseline/wandb/run-20220421_050212-4nf3s86p/files/wandb-metadata.json wandb-metadata.json
+2022-04-21 05:07:53,363 INFO    SenderThread:2308740 [dir_watcher.py:finish():315] scan save: output/query_baseline/wandb/run-20220421_050212-4nf3s86p/files/config.yaml config.yaml
+2022-04-21 05:07:53,369 DEBUG   Thread-14 :2308740 [connectionpool.py:_new_conn():939] Starting new HTTPS connection (1): api.wandb.ai:443
+2022-04-21 05:07:53,370 INFO    SenderThread:2308740 [file_pusher.py:finish():169] shutting down file pusher
+2022-04-21 05:07:53,370 INFO    SenderThread:2308740 [file_pusher.py:join():174] waiting for file pusher
+2022-04-21 05:07:53,378 DEBUG   Thread-15 :2308740 [connectionpool.py:_new_conn():939] Starting new HTTPS connection (1): api.wandb.ai:443
+2022-04-21 05:07:53,743 DEBUG   Thread-13 :2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+2022-04-21 05:07:53,748 DEBUG   Thread-13 :2308740 [connectionpool.py:_new_conn():939] Starting new HTTPS connection (1): storage.googleapis.com:443
+2022-04-21 05:07:53,868 DEBUG   Thread-15 :2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+2022-04-21 05:07:53,872 DEBUG   Thread-15 :2308740 [connectionpool.py:_new_conn():939] Starting new HTTPS connection (1): storage.googleapis.com:443
+2022-04-21 05:07:54,107 DEBUG   Thread-12 :2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+2022-04-21 05:07:54,114 DEBUG   Thread-12 :2308740 [connectionpool.py:_new_conn():939] Starting new HTTPS connection (1): storage.googleapis.com:443
+2022-04-21 05:07:54,328 DEBUG   Thread-14 :2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+2022-04-21 05:07:54,333 DEBUG   Thread-14 :2308740 [connectionpool.py:_new_conn():939] Starting new HTTPS connection (1): storage.googleapis.com:443
+2022-04-21 05:07:54,343 DEBUG   Thread-13 :2308740 [connectionpool.py:_make_request():433] https://storage.googleapis.com:443 "PUT /wandb-production.appspot.com/ruc-bupt/Paddle%20SINC/4nf3s86p/output.log?Expires=1650604073&GoogleAccessId=wandb-production%40appspot.gserviceaccount.com&Signature=RNbBpI2ib6pNofJDNVcbuWREW67mxQ6OSnQdoxLr8uQEbr%2BAd9qPBmdm6ZIl%2F6AHpH7Hs4Vflp7ntNwamMhfb4o4DROiJ%2Flr1ZzjXMbPRwWq6nhCNtLG4GU5XQnzgiK5adqPB9lsnAKbH9Z%2B%2FQb5%2BO7xIh%2BdoOI6U7ZhBpnReyC54cdSHymLunGmsMGbq5njPsVp%2FnBlg9RRUVqXpG9WiPAfsFoLuoyhgCh8Ol7Rf1ZYlMafQ0D4EAWXd6UlGFe3jIkoKnnH1B0wdZGcAk3f7FnC1tVS082F%2B8lOfG7WvKqpa3DrzjmnuNjILD%2BFOvyaw2XNuxIJgWHTTMgMjSUzBg%3D%3D HTTP/1.1" 200 0
+2022-04-21 05:07:54,345 INFO    Thread-13 :2308740 [upload_job.py:push():112] Uploaded file output/query_baseline/wandb/run-20220421_050212-4nf3s86p/files/output.log
+2022-04-21 05:07:54,459 DEBUG   Thread-15 :2308740 [connectionpool.py:_make_request():433] https://storage.googleapis.com:443 "PUT /wandb-production.appspot.com/ruc-bupt/Paddle%20SINC/4nf3s86p/config.yaml?Expires=1650604073&GoogleAccessId=wandb-production%40appspot.gserviceaccount.com&Signature=b%2Blb%2FcuEGie9xTPuPdJ%2BIGCv170kDJGw62TkqwnlhvoDKNPKhJxVVlnyFRz%2BUh6VS0D4qhJj355B0PLqMXY1wgA0PNZTwPn1Or7sT5KPqTP8JdUFEiKof3T4BbHEVL3xB166DmSMVSj%2FUGw1UjJAbf55hX3t9kztF8%2Fykq%2FfTpFnCycWJ%2B%2BSy%2Fei3ZaLRpQWx%2By6WQJeYvBxjP8fW3JOGeSoJif%2FwtMH8IHHipfJkSwpnvk1FjoB6oNLNuSxZBl%2B8CtCnkmWkGneM9uTYL83jWCRRfWRquaX2KOIxUYoda3fno3ONZ2PNew7i%2FM4zyRQSlj0SjT%2F%2FbKHlxyoZrIZ5g%3D%3D HTTP/1.1" 200 0
+2022-04-21 05:07:54,462 INFO    Thread-15 :2308740 [upload_job.py:push():112] Uploaded file output/query_baseline/wandb/run-20220421_050212-4nf3s86p/files/config.yaml
+2022-04-21 05:07:54,690 DEBUG   Thread-12 :2308740 [connectionpool.py:_make_request():433] https://storage.googleapis.com:443 "PUT /wandb-production.appspot.com/ruc-bupt/Paddle%20SINC/4nf3s86p/requirements.txt?Expires=1650604073&GoogleAccessId=wandb-production%40appspot.gserviceaccount.com&Signature=OGCyln401y3xbPzcLSOWnoO4mG9ltF5%2F%2BUAgWxPq1iNdZQxWfwbdOUqtLdn5K7O4kjcC886qHV7JUuo4MLl7OJWGzI8810ZR8MFo%2FBjtsLMH1O6fcvcSLOPF8ROJKJ4vVX%2F07Cgzeo%2F0%2FZAQD5ZwftZBIXym0i5U3USGelNPrtEY4M8qKXMJHwrHXu%2FCWTnwb9CZonWF8IfNiIRAggJMBGeDapP3hk8ZB5tYXA3SO8sYI4zd9iMXHImiIriaXoexTgUZL3cfQCwTr0V2BZ9f54PlWamJF7tUFCZfX2GGoQwY1%2F3a1OVugXGVLx6GC0EJk5wDqhhFFa4bYkghpboA5A%3D%3D HTTP/1.1" 200 0
+2022-04-21 05:07:54,693 INFO    Thread-12 :2308740 [upload_job.py:push():112] Uploaded file output/query_baseline/wandb/run-20220421_050212-4nf3s86p/files/requirements.txt
+2022-04-21 05:07:54,870 DEBUG   Thread-14 :2308740 [connectionpool.py:_make_request():433] https://storage.googleapis.com:443 "PUT /wandb-production.appspot.com/ruc-bupt/Paddle%20SINC/4nf3s86p/wandb-summary.json?Expires=1650604073&GoogleAccessId=wandb-production%40appspot.gserviceaccount.com&Signature=BeN0WG0hhB%2B4kdO01S7ou%2BKWl2CLnnb3%2BBL0UjQeFRuEwSwZa5xPppksi2ZQDpu46t1zSUXSJ8WH%2BNzyKVqQ59r53b7HKK2SsHBBYLELMKnt%2BmMFPPuEYRsL3QvXzf8%2BW2vJRKEQf9lDo%2B8RENapzqVdoK3%2BF83J92edW4NaxALvTnLm2mPB05ZdAEug%2BddTmEDWAdoFBZo8xVV%2B1ob8fqiE9HPkJ3JClIfD3Pxj5Kx2aMokt7%2BJK6lAajrZ6I5iMiuLj2lFjX2JqD5vWDxNm2Nsky17dVklq7LwmIzT%2BgmywGrUFGxz6ews8rriesOqEiQlp2Qo2iazdfPSV8E9bg%3D%3D HTTP/1.1" 200 0
+2022-04-21 05:07:54,876 INFO    Thread-14 :2308740 [upload_job.py:push():112] Uploaded file output/query_baseline/wandb/run-20220421_050212-4nf3s86p/files/wandb-summary.json
+2022-04-21 05:07:55,656 DEBUG   Thread-5  :2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /files/ruc-bupt/Paddle%20SINC/4nf3s86p/file_stream HTTP/1.1" 200 None
+2022-04-21 05:07:55,920 DEBUG   Thread-5  :2308740 [connectionpool.py:_make_request():433] https://api.wandb.ai:443 "POST /files/ruc-bupt/Paddle%20SINC/4nf3s86p/file_stream HTTP/1.1" 200 None
+2022-04-21 05:07:55,924 INFO    MainThread:2308740 [internal.py:handle_exit():137] Internal process exited
