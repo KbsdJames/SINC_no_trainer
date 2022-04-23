@@ -32,7 +32,7 @@ import socket
 
 logger = logging.getLogger(__name__)
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "0,1,2,3"
+#os.environ["CUDA_VISIBLE_DEVICES"] = "0,1,2,3"
 
 def parse_args():
     '''
@@ -60,7 +60,7 @@ def parse_args():
     parser.add_argument("--max_train_steps", type=int, default=None, help="Total number of training steps to perform. If provided, overrides num_train_epochs.")
     parser.add_argument("--gradient_accumulation_steps", type=int, default=1, help="Number of updates steps to accumulate before performing a backward/update pass.")
     parser.add_argument("--lr_scheduler_type", type=SchedulerType, default="linear", choices=["linear", "cosine", "cosine_with_restarts", "polynomial", "constant", "constant_with_warmup"])
-    parser.add_argument("--num_warmup_steps", type=int, default=1000, help="Number of steps for the warmup in the lr scheduler.")
+    parser.add_argument("--num_warmup_steps", type=int, default=0, help="Number of steps for the warmup in the lr scheduler.")
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--num_beams", type=int, default=4)
     parser.add_argument("--checkpointing_steps", type=str, default="epoch", help="Whether the various states should be saved at the end of every n steps, or 'epoch' for each epoch.")

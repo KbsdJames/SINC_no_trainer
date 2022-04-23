@@ -1,95 +1,0 @@
-loading configuration file https://huggingface.co/fnlp/cpt-base/resolve/main/config.json from cache at /home2/gaobofei/.cache/huggingface/transformers/5e8018bdccae5c0e3d7464fc230a05a1c857e9e0ef5bc2d100680009e00e76f0.da6ee5ba6f5e82cef9e75d75e30af47c6376689b83a1d3e1906d4e867f9309a1
-Model config BartConfig {
-  "activation_dropout": 0.1,
-  "activation_function": "gelu",
-  "add_bias_logits": false,
-  "add_final_layer_norm": false,
-  "architectures": [
-    "BartModel"
-  ],
-  "attention_dropout": 0.1,
-  "bos_token_id": 101,
-  "classif_dropout": 0.1,
-  "classifier_dropout": 0.1,
-  "d_model": 768,
-  "decoder_attention_heads": 12,
-  "decoder_ffn_dim": 3072,
-  "decoder_layerdrop": 0.0,
-  "decoder_layers": 2,
-  "decoder_start_token_id": 102,
-  "dropout": 0.1,
-  "early_stopping": true,
-  "encoder_attention_heads": 12,
-  "encoder_ffn_dim": 3072,
-  "encoder_layerdrop": 0.0,
-  "encoder_layers": 12,
-  "eos_token_id": 102,
-  "forced_eos_token_id": 102,
-  "gradient_checkpointing": false,
-  "id2label": {
-    "0": "LABEL_0",
-    "1": "LABEL_1",
-    "2": "LABEL_2"
-  },
-  "init_std": 0.02,
-  "is_encoder_decoder": true,
-  "label2id": {
-    "LABEL_0": 0,
-    "LABEL_1": 1,
-    "LABEL_2": 2
-  },
-  "max_position_embeddings": 1024,
-  "model_type": "bart",
-  "no_repeat_ngram_size": 3,
-  "normalize_before": false,
-  "normalize_embedding": true,
-  "num_beams": 4,
-  "num_hidden_layers": 12,
-  "pad_token_id": 0,
-  "scale_embedding": false,
-  "task_specific_params": {
-    "summarization": {
-      "length_penalty": 1.0,
-      "max_length": 128,
-      "min_length": 12,
-      "num_beams": 4
-    },
-    "summarization_cnn": {
-      "length_penalty": 2.0,
-      "max_length": 142,
-      "min_length": 56,
-      "num_beams": 4
-    },
-    "summarization_xsum": {
-      "length_penalty": 1.0,
-      "max_length": 62,
-      "min_length": 11,
-      "num_beams": 6
-    }
-  },
-  "transformers_version": "4.4.2",
-  "use_cache": true,
-  "vocab_size": 21128
-}
-
-loading file https://huggingface.co/fnlp/cpt-base/resolve/main/vocab.txt from cache at /home2/gaobofei/.cache/huggingface/transformers/1e78823f936f9b7fd284d7edeb9f15bd80ab03c4d935324bc93d17569404c6a8.accd894ff58c6ff7bd4f3072890776c14f4ea34fcc08e79cd88c2d157756dceb
-loading file https://huggingface.co/fnlp/cpt-base/resolve/main/added_tokens.json from cache at None
-loading file https://huggingface.co/fnlp/cpt-base/resolve/main/special_tokens_map.json from cache at /home2/gaobofei/.cache/huggingface/transformers/0c554635712016feb81785acc5036893453dd9c880c08e20e9a070727527d833.dd8bd9bfd3664b530ea4e645105f557769387b3da9f79bdb55ed556bdd80611d
-loading file https://huggingface.co/fnlp/cpt-base/resolve/main/tokenizer_config.json from cache at /home2/gaobofei/.cache/huggingface/transformers/a4f787d368f75b4d1e1e1f3e16eb2bcac3d43fd469f5e3e5fffed90401e342e0.4930bdcbc6f75dead7cdeadc249fdb55dcb3cd75bdcee68ee5fcd8aeb6e6e359
-loading file https://huggingface.co/fnlp/cpt-base/resolve/main/tokenizer.json from cache at None
-loading weights file https://huggingface.co/fnlp/cpt-base/resolve/main/pytorch_model.bin from cache at /home2/gaobofei/.cache/huggingface/transformers/406ff432f148aec744133454faf467d61051cf31e150bb2ec9b6b9f791747984.6eeb38e0b603c4972b2bb17777f971a5d1186a405b998a9f5eefeba086b88674
-Some weights of the model checkpoint at fnlp/cpt-base were not used when initializing CPTForConditionalGeneration: ['encoder.encoder.layer.10.attention.self.query.weight', 'encoder.encoder.layer.10.attention.self.query.bias', 'encoder.encoder.layer.10.attention.self.key.weight', 'encoder.encoder.layer.10.attention.self.key.bias', 'encoder.encoder.layer.10.attention.self.value.weight', 'encoder.encoder.layer.10.attention.self.value.bias', 'encoder.encoder.layer.10.attention.output.dense.weight', 'encoder.encoder.layer.10.attention.output.dense.bias', 'encoder.encoder.layer.10.attention.output.LayerNorm.weight', 'encoder.encoder.layer.10.attention.output.LayerNorm.bias', 'encoder.encoder.layer.10.intermediate.dense.weight', 'encoder.encoder.layer.10.intermediate.dense.bias', 'encoder.encoder.layer.10.output.dense.weight', 'encoder.encoder.layer.10.output.dense.bias', 'encoder.encoder.layer.10.output.LayerNorm.weight', 'encoder.encoder.layer.10.output.LayerNorm.bias', 'encoder.encoder.layer.11.attention.self.query.weight', 'encoder.encoder.layer.11.attention.self.query.bias', 'encoder.encoder.layer.11.attention.self.key.weight', 'encoder.encoder.layer.11.attention.self.key.bias', 'encoder.encoder.layer.11.attention.self.value.weight', 'encoder.encoder.layer.11.attention.self.value.bias', 'encoder.encoder.layer.11.attention.output.dense.weight', 'encoder.encoder.layer.11.attention.output.dense.bias', 'encoder.encoder.layer.11.attention.output.LayerNorm.weight', 'encoder.encoder.layer.11.attention.output.LayerNorm.bias', 'encoder.encoder.layer.11.intermediate.dense.weight', 'encoder.encoder.layer.11.intermediate.dense.bias', 'encoder.encoder.layer.11.output.dense.weight', 'encoder.encoder.layer.11.output.dense.bias', 'encoder.encoder.layer.11.output.LayerNorm.weight', 'encoder.encoder.layer.11.output.LayerNorm.bias']
-- This IS expected if you are initializing CPTForConditionalGeneration from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
-- This IS NOT expected if you are initializing CPTForConditionalGeneration from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
-All the weights of CPTForConditionalGeneration were initialized from the model checkpoint at fnlp/cpt-base.
-If your task is similar to the task the model of the checkpoint was trained on, you can already use CPTForConditionalGeneration for predictions without further training.
-  0%|          | 0/11 [00:00<?, ?ba/s]  9%|▉         | 1/11 [00:01<00:15,  1.50s/ba] 18%|█▊        | 2/11 [00:02<00:13,  1.49s/ba] 27%|██▋       | 3/11 [00:04<00:11,  1.45s/ba] 36%|███▋      | 4/11 [00:05<00:10,  1.47s/ba] 45%|████▌     | 5/11 [00:07<00:08,  1.47s/ba] 55%|█████▍    | 6/11 [00:08<00:07,  1.46s/ba] 64%|██████▎   | 7/11 [00:10<00:05,  1.45s/ba] 73%|███████▎  | 8/11 [00:11<00:04,  1.45s/ba] 82%|████████▏ | 9/11 [00:13<00:02,  1.46s/ba] 91%|█████████ | 10/11 [00:14<00:01,  1.46s/ba]100%|██████████| 11/11 [00:15<00:00,  1.21s/ba]100%|██████████| 11/11 [00:15<00:00,  1.39s/ba]
-  0%|          | 0/2 [00:00<?, ?ba/s] 50%|█████     | 1/2 [00:01<00:01,  1.69s/ba]100%|██████████| 2/2 [00:01<00:00,  1.13ba/s]
-INFO:__main__:***** Running training *****
-INFO:__main__:  Num examples = 10413
-INFO:__main__:  Num Epochs = 10
-INFO:__main__:  Instantaneous batch size per device = 5
-INFO:__main__:  Total train batch size (w. parallel, distributed & accumulation) = 20
-INFO:__main__:  Gradient Accumulation steps = 1
-INFO:__main__:  Total optimization steps = 5210
-  0%|          | 0/5210 [00:00<?, ?it/s]
