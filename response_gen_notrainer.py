@@ -23,6 +23,8 @@ from accelerate import Accelerator,DistributedDataParallelKwargs
 from accelerate.utils import set_seed
 from torch.utils.data import DataLoader
 
+from cal_metric import compute_BLEU_batch, compute_f1_batch, compute_distinct_batch
+
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 from modeling_cpt import CPTForConditionalGeneration
 
@@ -60,7 +62,7 @@ def parse_args():
     parser.add_argument("--max_train_steps", type=int, default=None, help="Total number of training steps to perform. If provided, overrides num_train_epochs.")
     parser.add_argument("--gradient_accumulation_steps", type=int, default=1, help="Number of updates steps to accumulate before performing a backward/update pass.")
     parser.add_argument("--lr_scheduler_type", type=SchedulerType, default="linear", choices=["linear", "cosine", "cosine_with_restarts", "polynomial", "constant", "constant_with_warmup"])
-    parser.add_argument("--num_warmup_steps", type=int, default=1000, help="Number of steps for the warmup in the lr scheduler.")
+    parser.add_argument("--num_warmup_steps", type=int, default=0, help="Number of steps for the warmup in the lr scheduler.")
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--num_beams", type=int, default=4)
     parser.add_argument("--checkpointing_steps", type=str, default="epoch", help="Whether the various states should be saved at the end of every n steps, or 'epoch' for each epoch.")
@@ -111,6 +113,11 @@ def main():
     #accelerator = Accelerator(kwargs_handlers=[ddp_kwargs])
     accelerator = Accelerator()
     
+    # repo creation
+    if accelerator.is_main_process:
+        if args.output_dir is not None:
+            os.makedirs(args.output_dir, exist_ok=True)
+    accelerator.wait_for_everyone()
 
     wandb.init(config=args,
                project=args.project_name,
@@ -141,12 +148,6 @@ def main():
     # seed
     if args.seed is not None:
         set_seed(args.seed)
-
-    # repo creation
-    if accelerator.is_main_process:
-        if args.output_dir is not None:
-            os.makedirs(args.output_dir, exist_ok=True)
-    accelerator.wait_for_everyone()
 
     raw_datasets = load_dataset(args)
 
@@ -325,7 +326,7 @@ def main():
             checkpointing_steps = None
 
     # metric
-    metric = load_metric('sacrebleu')
+    #metric = load_metric('sacrebleu')
 
     # train and eval
     if args.mode == "train":
@@ -398,15 +399,25 @@ def main():
                     eval_preds.extend(decoded_preds)
                     eval_labels.extend(decoded_labels)
                     decoded_preds, decoded_labels = postprocess_text(decoded_preds, decoded_labels)
-                    metric.add_batch(predictions=decoded_preds, references=decoded_labels)
-            
-            result = metric.compute()
-            wandb.log({'eval sacrebleu':result["score"], 'epoch':epoch})
+                                
+            #result = metric.compute()
+            # 预处理需要计算metric的输入
+            eval_preds_metric = []
+            eval_refs_metric = []
+            for i in range(0,len(eval_preds)):
+                eval_preds_metric.append(eval_preds[i].split())
+                eval_refs_metric.append(eval_labels[i].split())
+            # 计算
+            BLEU_1, BLEU_2 = compute_BLEU_batch(eval_preds_metric, eval_refs_metric)
+            distinct_1, distinct_2 = compute_distinct_batch(eval_preds_metric)
+            f1_score = compute_f1_batch(eval_preds_metric, eval_refs_metric)
+            result = {'BLEU_1':BLEU_1, 'BLEU_2':BLEU_2, 'distinct_1':distinct_1, 'distinct_2':distinct_2, 'f1_score':f1_score}
+            wandb.log(result)
             logger.info(result)
             
             eval_output = []
             for i in range(0,len(eval_preds)):
-                eval_output.append(eval_preds[i].replace(" ", "") + '\t' + eval_labels[i])
+                eval_output.append(eval_preds[i].replace(" ", "") + '\t' + eval_labels[i].replace(" ", ""))
 
             test_output = []
             for src in raw_datasets['test']['input']:
@@ -436,15 +447,7 @@ def main():
             if accelerator.is_main_process:
                 tokenizer.save_pretrained(args.output_dir)
             with open(os.path.join(args.output_dir, "all_results.json"), "w") as f:
-                json.dump(
-                    {
-                        "sacrebleu": result["score"],
-                        "counts": result["counts"],
-                        "totals": result["totals"],
-                        "precisions": result["precisions"],
-                    },
-                    f,
-                )
+                json.dump(result, f)
     if args.mode == "test":
         """batch decode test set"""
 
