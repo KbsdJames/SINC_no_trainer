@@ -23,6 +23,8 @@ from accelerate import Accelerator,DistributedDataParallelKwargs
 from accelerate.utils import set_seed
 from torch.utils.data import DataLoader
 
+from cal_metric import compute_BLEU_batch, compute_f1_batch, compute_distinct_batch
+
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 from modeling_cpt import CPTForConditionalGeneration
 
@@ -54,7 +56,7 @@ def parse_args():
     parser.add_argument("--mode", type=str, default="train", choices=["train", "validation", "test"])  # 运行模式
     # 参数相关
     parser.add_argument("--per_device_batch_size", type=int, default=2)
-    parser.add_argument("--learning_rate", type=float, default=1e-5)
+    parser.add_argument("--learning_rate", type=float, default=5e-5)
     parser.add_argument("--weight_decay", type=float, default=0.0)
     parser.add_argument("--num_train_epochs", type=int, default=2)
     parser.add_argument("--max_train_steps", type=int, default=None, help="Total number of training steps to perform. If provided, overrides num_train_epochs.")
@@ -111,6 +113,11 @@ def main():
     #accelerator = Accelerator(kwargs_handlers=[ddp_kwargs])
     accelerator = Accelerator()
     
+    # repo creation
+    if accelerator.is_main_process:
+        if args.output_dir is not None:
+            os.makedirs(args.output_dir, exist_ok=True)
+    accelerator.wait_for_everyone()
 
     wandb.init(config=args,
                project=args.project_name,
@@ -141,12 +148,6 @@ def main():
     # seed
     if args.seed is not None:
         set_seed(args.seed)
-
-    # repo creation
-    if accelerator.is_main_process:
-        if args.output_dir is not None:
-            os.makedirs(args.output_dir, exist_ok=True)
-    accelerator.wait_for_everyone()
 
     raw_datasets = load_dataset(args)
 
@@ -205,8 +206,6 @@ def main():
 
         max_len = args.max_source_length
         inputs_trunc = []
-        for i in inputs:
-            input_encode = tokenizer.encode(i)
         for i in inputs:
             input_encode = tokenizer.encode(i)
             if(len(input_encode) > max_len):
@@ -325,7 +324,7 @@ def main():
             checkpointing_steps = None
 
     # metric
-    metric = load_metric('sacrebleu')
+    #metric = load_metric('sacrebleu')
 
     # train and eval
     if args.mode == "train":
@@ -398,22 +397,32 @@ def main():
                     eval_preds.extend(decoded_preds)
                     eval_labels.extend(decoded_labels)
                     decoded_preds, decoded_labels = postprocess_text(decoded_preds, decoded_labels)
-                    metric.add_batch(predictions=decoded_preds, references=decoded_labels)
             
-            result = metric.compute()
-            wandb.log({'eval sacrebleu':result["score"], 'epoch':epoch})
+            #result = metric.compute()
+            # 预处理需要计算metric的输入
+            eval_preds_metric = []
+            eval_refs_metric = []
+            for i in range(0,len(eval_preds)):
+                eval_preds_metric.append(eval_preds[i].split())
+                eval_refs_metric.append(eval_labels[i].split())
+            # 计算
+            BLEU_1, BLEU_2 = compute_BLEU_batch(eval_preds_metric, eval_refs_metric)
+            distinct_1, distinct_2 = compute_distinct_batch(eval_preds_metric)
+            f1_score = compute_f1_batch(eval_preds_metric, eval_refs_metric)
+            result = {'BLEU_1':BLEU_1, 'BLEU_2':BLEU_2, 'distinct_1':distinct_1, 'distinct_2':distinct_2, 'f1_score':f1_score}
+            wandb.log(result)
             logger.info(result)
             
             eval_output = []
             for i in range(0,len(eval_preds)):
-                eval_output.append(eval_preds[i] + '\t' + eval_labels[i])
+                eval_output.append(eval_preds[i].replace(" ", "") + '\t' + eval_labels[i].replace(" ", ""))
 
             test_output = []
             for src in raw_datasets['test']['input']:
                 # encode方法把输入转为ids
-                input_ids = tokenizer.encode(src, return_tensors='pt')
+                input_ids = tokenizer.encode(src, max_length=args.max_source_length, return_tensors='pt')
                 logits = accelerator.unwrap_model(model).generate(input_ids.cuda(), num_beams=4,)
-                tgt = tokenizer.decode(logits.squeeze(),skip_special_tokens=True)
+                tgt = tokenizer.decode(logits.squeeze(), skip_special_tokens=True)
                 # 之前出现的问题：多卡下每一台都在打印信息，可以wait一下来解决
                 test_output.append(tgt.replace(" ", ""))
 
@@ -436,15 +445,7 @@ def main():
             if accelerator.is_main_process:
                 tokenizer.save_pretrained(args.output_dir)
             with open(os.path.join(args.output_dir, "all_results.json"), "w") as f:
-                json.dump(
-                    {
-                        "sacrebleu": result["score"],
-                        "counts": result["counts"],
-                        "totals": result["totals"],
-                        "precisions": result["precisions"],
-                    },
-                    f,
-                )
+                json.dump(result, f)
     if args.mode == "test":
         """batch decode test set"""
 

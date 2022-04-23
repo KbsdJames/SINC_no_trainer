@@ -230,9 +230,7 @@ def main():
                 input_encode = input_trunc
             inputs_trunc.append(tokenizer.decode(input_encode[1:-1]).replace(" ", ""))
         inputs = inputs_trunc
-
         model_inputs = tokenizer(inputs, max_length=args.max_source_length, padding=False, truncation=True)
-
         return model_inputs
 
     def postprocess_text(preds, labels):
