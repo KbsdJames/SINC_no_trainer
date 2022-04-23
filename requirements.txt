@@ -1,0 +1,6 @@
+accelerate==0.6.2
+datasets==2.0.0
+numpy==1.19.2
+torch==1.8.1
+tqdm==4.64.0
+transformers==4.4.2
