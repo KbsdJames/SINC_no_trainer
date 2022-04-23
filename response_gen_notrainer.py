@@ -1,3 +1,4 @@
+from lib2to3.pgen2.tokenize import tokenize
 import os
 import sys
 import random
@@ -8,7 +9,7 @@ import json
 import logging
 import datasets
 from datasets import Dataset, load_metric
-import sacrebleu
+import pdb
 
 import math
 import numpy as np
@@ -31,7 +32,7 @@ import socket
 
 logger = logging.getLogger(__name__)
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "0,1,2,3"
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 def parse_args():
     '''
@@ -53,7 +54,7 @@ def parse_args():
     parser.add_argument("--mode", type=str, default="train", choices=["train", "validation", "test"])  # 运行模式
     # 参数相关
     parser.add_argument("--per_device_batch_size", type=int, default=2)
-    parser.add_argument("--learning_rate", type=float, default=1e-5)
+    parser.add_argument("--learning_rate", type=float, default=2e-5)
     parser.add_argument("--weight_decay", type=float, default=0.0)
     parser.add_argument("--num_train_epochs", type=int, default=2)
     parser.add_argument("--max_train_steps", type=int, default=None, help="Total number of training steps to perform. If provided, overrides num_train_epochs.")
@@ -63,6 +64,7 @@ def parse_args():
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--num_beams", type=int, default=4)
     parser.add_argument("--checkpointing_steps", type=str, default="epoch", help="Whether the various states should be saved at the end of every n steps, or 'epoch' for each epoch.")
+    parser.add_argument("--context_pos", type=int, default=2)
     # Wandb
     parser.add_argument("--team_name", type=str, default="ruc-bupt")
     parser.add_argument("--project_name", type=str, default="Paddle SINC")
@@ -73,17 +75,17 @@ def parse_args():
     return args
 
 def load_data(data_path):
-    results={'input':[], 'query':[]}
+    results={'input':[], 'response':[]}
     with open(data_path, encoding='utf-8') as f:
         for line in f.readlines():
             line_lst = line[:-1].split('\t')
             assert(len(line_lst) <= 2)
             results['input'].append(line_lst[0])
             if(len(line_lst) == 2):
-                results['query'].append(line_lst[1])
+                results['response'].append(line_lst[1])
     
-        if(len(results['query']) == 0):
-            del results['query']
+        if(len(results['response']) == 0):
+            del results['response']
         results=Dataset.from_dict(results)
     return results
 
@@ -156,11 +158,37 @@ def main():
     model.config.max_length=args.max_target_length
 
     # data preprocessing
-
     def preprocess_function_not_test(examples):
-        """考虑加一个手动truncation"""
+        """考虑加一个手动truncation，把context从前面截断"""
         inputs = examples['input']
-        targets = examples['query']
+        targets = examples['response']
+
+        max_len = args.max_source_length
+        inputs_trunc = []
+        for i in inputs:
+            input_encode = tokenizer.encode(i)
+            if(len(input_encode) > max_len):
+                input_trunc = []
+                sep_cnt = 0
+                trunc_len = len(input_encode) - max_len
+                for token in input_encode:
+                    if(token == tokenizer.convert_tokens_to_ids('[SEP]')):
+                        sep_cnt += 1
+                    if(sep_cnt < args.context_pos):
+                        input_trunc.append(token)
+                        continue
+                    if(sep_cnt == args.context_pos and token == tokenizer.convert_tokens_to_ids('[SEP]')):
+                        input_trunc.append(token)
+                        continue
+                    # context位置
+                    if(trunc_len > 0):
+                        trunc_len -= 1
+                        continue
+                    input_trunc.append(token)
+                assert(len(input_trunc) <= max_len)
+                input_encode = input_trunc
+            inputs_trunc.append(tokenizer.decode(input_encode[1:-1]).replace(" ", ""))
+        inputs = inputs_trunc
         model_inputs = tokenizer(inputs, max_length=args.max_source_length, padding=False, truncation=True)
 
         # setup the tokenizer for targets
@@ -174,6 +202,34 @@ def main():
     def preprocess_function_test(examples):
         """手动加一个truncation"""
         inputs = examples['input']
+
+        max_len = args.max_source_length
+        inputs_trunc = []
+        for i in inputs:
+            input_encode = tokenizer.encode(i)
+            if(len(input_encode) > max_len):
+                input_trunc = []
+                sep_cnt = 0
+                trunc_len = len(input_encode) - max_len
+                for token in input_encode:
+                    if(token == tokenizer.convert_tokens_to_ids('[SEP]')):
+                        sep_cnt += 1
+                    if(sep_cnt < args.context_pos):
+                        input_trunc.append(token)
+                        continue
+                    if(sep_cnt == args.context_pos and token == tokenizer.convert_tokens_to_ids('[SEP]')):
+                        input_trunc.append(token)
+                        continue
+                    # context位置
+                    if(trunc_len > 0):
+                        trunc_len -= 1
+                        continue
+                    input_trunc.append(token)
+                assert(len(input_trunc) <= max_len)
+                input_encode = input_trunc
+            inputs_trunc.append(tokenizer.decode(input_encode[1:-1]).replace(" ", ""))
+        inputs = inputs_trunc
+
         model_inputs = tokenizer(inputs, max_length=args.max_source_length, padding=False, truncation=True)
 
         return model_inputs
@@ -202,17 +258,15 @@ def main():
                 batched=True,
                 remove_columns=raw_datasets["validation"].column_names,
             )
-
-            # CPT doesn't use token_type_ids
-            train_dataset = train_dataset.remove_columns('token_type_ids')
-            eval_dataset = eval_dataset.remove_columns('token_type_ids')
-        if args.mode == "test":
             test_dataset = raw_datasets["test"]
             test_dataset = test_dataset.map(  # 注意test有区别
                 preprocess_function_test,
                 batched=True,
                 remove_columns=raw_datasets["test"].column_names,
             )
+            # CPT doesn't use token_type_ids
+            train_dataset = train_dataset.remove_columns('token_type_ids')
+            eval_dataset = eval_dataset.remove_columns('token_type_ids')
             test_dataset = test_dataset.remove_columns('token_type_ids')
     
     # data collator
@@ -352,7 +406,16 @@ def main():
             
             eval_output = []
             for i in range(0,len(eval_preds)):
-                eval_output.append(eval_preds[i] + '\t' + eval_labels[i])
+                eval_output.append(eval_preds[i].replace(" ", "") + '\t' + eval_labels[i])
+
+            test_output = []
+            for src in raw_datasets['test']['input']:
+                # encode方法把输入转为ids
+                input_ids = tokenizer.encode(src, max_length=args.max_source_length, return_tensors='pt')
+                logits = accelerator.unwrap_model(model).generate(input_ids.cuda(), num_beams=4,)
+                tgt = tokenizer.decode(logits.squeeze(), skip_special_tokens=True)
+                # 之前出现的问题：多卡下每一台都在打印信息，可以wait一下来解决
+                test_output.append(tgt.replace(" ", ""))
 
             if args.checkpointing_steps == "epoch":
                 output_dir = f"epoch_{epoch}"
@@ -361,6 +424,8 @@ def main():
                 accelerator.save_state(output_dir)
                 with open(os.path.join(output_dir,'eval_output.txt'), "w",encoding='UTF-8') as writer:
                     writer.write("\n".join(eval_output))
+                with open(os.path.join(output_dir,'test_output.txt'), "w",encoding='UTF-8') as writer:
+                    writer.write("\n".join(test_output))
         # 所有epoch都结束
         wandb.finish()
         if args.output_dir is not None:
@@ -382,7 +447,6 @@ def main():
                 )
     if args.mode == "test":
         """batch decode test set"""
-
 
 if __name__ == "__main__":
     main()

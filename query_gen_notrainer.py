@@ -1,3 +1,4 @@
+from lib2to3.pgen2.tokenize import tokenize
 import os
 import sys
 import random
@@ -8,7 +9,7 @@ import json
 import logging
 import datasets
 from datasets import Dataset, load_metric
-import sacrebleu
+import pdb
 
 import math
 import numpy as np
@@ -63,6 +64,7 @@ def parse_args():
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--num_beams", type=int, default=4)
     parser.add_argument("--checkpointing_steps", type=str, default="epoch", help="Whether the various states should be saved at the end of every n steps, or 'epoch' for each epoch.")
+    parser.add_argument("--context_pos", type=int, default=2)
     # Wandb
     parser.add_argument("--team_name", type=str, default="ruc-bupt")
     parser.add_argument("--project_name", type=str, default="Paddle SINC")
@@ -109,7 +111,7 @@ def main():
     #accelerator = Accelerator(kwargs_handlers=[ddp_kwargs])
     accelerator = Accelerator()
     
-    """
+
     wandb.init(config=args,
                project=args.project_name,
                entity=args.team_name,
@@ -119,7 +121,7 @@ def main():
                dir=str(args.output_dir),
                job_type="training",
                reinit=True)
-    """
+    
     logging.basicConfig(
         format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
         datefmt="%m/%d/%Y %H:%M:%S",
@@ -156,11 +158,37 @@ def main():
     model.config.max_length=args.max_target_length
 
     # data preprocessing
-
     def preprocess_function_not_test(examples):
-        """考虑加一个手动truncation"""
+        """考虑加一个手动truncation，把context从前面截断"""
         inputs = examples['input']
         targets = examples['query']
+
+        max_len = args.max_source_length
+        inputs_trunc = []
+        for i in inputs:
+            input_encode = tokenizer.encode(i)
+            if(len(input_encode) > max_len):
+                input_trunc = []
+                sep_cnt = 0
+                trunc_len = len(input_encode) - max_len
+                for token in input_encode:
+                    if(token == tokenizer.convert_tokens_to_ids('[SEP]')):
+                        sep_cnt += 1
+                    if(sep_cnt < args.context_pos):
+                        input_trunc.append(token)
+                        continue
+                    if(sep_cnt == args.context_pos and token == tokenizer.convert_tokens_to_ids('[SEP]')):
+                        input_trunc.append(token)
+                        continue
+                    # context位置
+                    if(trunc_len > 0):
+                        trunc_len -= 1
+                        continue
+                    input_trunc.append(token)
+                assert(len(input_trunc) <= max_len)
+                input_encode = input_trunc
+            inputs_trunc.append(tokenizer.decode(input_encode[1:-1]).replace(" ", ""))
+        inputs = inputs_trunc
         model_inputs = tokenizer(inputs, max_length=args.max_source_length, padding=False, truncation=True)
 
         # setup the tokenizer for targets
@@ -174,8 +202,36 @@ def main():
     def preprocess_function_test(examples):
         """手动加一个truncation"""
         inputs = examples['input']
-        model_inputs = tokenizer(inputs, max_length=args.max_source_length, padding=False, truncation=True)
 
+        max_len = args.max_source_length
+        inputs_trunc = []
+        for i in inputs:
+            input_encode = tokenizer.encode(i)
+        for i in inputs:
+            input_encode = tokenizer.encode(i)
+            if(len(input_encode) > max_len):
+                input_trunc = []
+                sep_cnt = 0
+                trunc_len = len(input_encode) - max_len
+                for token in input_encode:
+                    if(token == tokenizer.convert_tokens_to_ids('[SEP]')):
+                        sep_cnt += 1
+                    if(sep_cnt < args.context_pos):
+                        input_trunc.append(token)
+                        continue
+                    if(sep_cnt == args.context_pos and token == tokenizer.convert_tokens_to_ids('[SEP]')):
+                        input_trunc.append(token)
+                        continue
+                    # context位置
+                    if(trunc_len > 0):
+                        trunc_len -= 1
+                        continue
+                    input_trunc.append(token)
+                assert(len(input_trunc) <= max_len)
+                input_encode = input_trunc
+            inputs_trunc.append(tokenizer.decode(input_encode[1:-1]).replace(" ", ""))
+        inputs = inputs_trunc
+        model_inputs = tokenizer(inputs, max_length=args.max_source_length, padding=False, truncation=True)
         return model_inputs
 
     def postprocess_text(preds, labels):
@@ -202,17 +258,15 @@ def main():
                 batched=True,
                 remove_columns=raw_datasets["validation"].column_names,
             )
-
-            # CPT doesn't use token_type_ids
-            train_dataset = train_dataset.remove_columns('token_type_ids')
-            eval_dataset = eval_dataset.remove_columns('token_type_ids')
-        if args.mode == "test":
             test_dataset = raw_datasets["test"]
             test_dataset = test_dataset.map(  # 注意test有区别
                 preprocess_function_test,
                 batched=True,
                 remove_columns=raw_datasets["test"].column_names,
             )
+            # CPT doesn't use token_type_ids
+            train_dataset = train_dataset.remove_columns('token_type_ids')
+            eval_dataset = eval_dataset.remove_columns('token_type_ids')
             test_dataset = test_dataset.remove_columns('token_type_ids')
     
     # data collator
@@ -287,7 +341,6 @@ def main():
         # Only show the progress bar once on each machine
         progress_bar = tqdm(range(args.max_train_steps), disable=not accelerator.is_local_main_process)
         completed_steps = 0
-
         for epoch in range(args.num_train_epochs):
             model.train()
             for step, batch in enumerate(train_dataloader):
@@ -303,7 +356,7 @@ def main():
                     optimizer.zero_grad()
                     progress_bar.update(1)
                     completed_steps += 1
-                    #wandb.log({'loss':loss}, step=completed_steps)
+                    wandb.log({'loss':loss}, step=completed_steps)
 
                 if isinstance(checkpointing_steps, int):
                     if completed_steps % checkpointing_steps == 0:
@@ -319,6 +372,8 @@ def main():
                 "max_length": args.max_target_length if args is not None else config.max_length,
                 "num_beams": args.num_beams,
             }
+            eval_preds = []
+            eval_labels = []
             for step, batch in enumerate(eval_dataloader):
                 with torch.no_grad():
                     generated_tokens = accelerator.unwrap_model(model).generate(
@@ -340,20 +395,39 @@ def main():
                         generated_tokens = generated_tokens[0]
                     decoded_preds = tokenizer.batch_decode(generated_tokens, skip_special_tokens=True)
                     decoded_labels = tokenizer.batch_decode(labels, skip_special_tokens=True)
-
+                    eval_preds.extend(decoded_preds)
+                    eval_labels.extend(decoded_labels)
                     decoded_preds, decoded_labels = postprocess_text(decoded_preds, decoded_labels)
                     metric.add_batch(predictions=decoded_preds, references=decoded_labels)
             
             result = metric.compute()
-            #wandb.log({'eval sacrebleu':result["score"]}, step=epoch)
+            wandb.log({'eval sacrebleu':result["score"], 'epoch':epoch})
             logger.info(result)
+            
+            eval_output = []
+            for i in range(0,len(eval_preds)):
+                eval_output.append(eval_preds[i] + '\t' + eval_labels[i])
+
+            test_output = []
+            for src in raw_datasets['test']['input']:
+                # encode方法把输入转为ids
+                input_ids = tokenizer.encode(src, return_tensors='pt')
+                logits = accelerator.unwrap_model(model).generate(input_ids.cuda(), num_beams=4,)
+                tgt = tokenizer.decode(logits.squeeze(),skip_special_tokens=True)
+                # 之前出现的问题：多卡下每一台都在打印信息，可以wait一下来解决
+                test_output.append(tgt.replace(" ", ""))
 
             if args.checkpointing_steps == "epoch":
                 output_dir = f"epoch_{epoch}"
                 if args.output_dir is not None:
                     output_dir = os.path.join(args.output_dir, output_dir)
                 accelerator.save_state(output_dir)
+                with open(os.path.join(output_dir,'eval_output.txt'), "w",encoding='UTF-8') as writer:
+                    writer.write("\n".join(eval_output))
+                with open(os.path.join(output_dir,'test_output.txt'), "w",encoding='UTF-8') as writer:
+                    writer.write("\n".join(test_output))
         # 所有epoch都结束
+        wandb.finish()
         if args.output_dir is not None:
             accelerator.wait_for_everyone()
             unwrapped_model = accelerator.unwrap_model(model)
@@ -373,7 +447,6 @@ def main():
                 )
     if args.mode == "test":
         """batch decode test set"""
-
 
 if __name__ == "__main__":
     main()
