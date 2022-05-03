@@ -158,7 +158,6 @@ def main():
     model=CPTForConditionalGeneration.from_pretrained(args.model_path, config=config)
     model.config.max_length=args.max_target_length
 
-    # data preprocessing
     def preprocess_function_not_test(examples):
         """考虑加一个手动truncation，把context从前面截断"""
         inputs = examples['input']
